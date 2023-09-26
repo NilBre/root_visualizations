@@ -1,5 +1,9 @@
+print('import ROOT')
 import ROOT
-from ROOT import * #TFile, TTree, gROOT, AddressOf, RDataFrame, TH1D, TStyle
+print('from ROOT import TFile and TH1D')
+from ROOT import TFile, TH1D
+print('import TTree, gROOT, TStyle')
+from ROOT import TTree, gROOT, TStyle, TLatex, TLine
 import math as m
 from math import *
 import sys, os
@@ -26,19 +30,19 @@ import json
 # ROOT.gROOT.SetBatch(True)
 # ROOT.gROOT.ProcessLine(".x /afs/cern.ch/user/b/bimitres/public/lhcbStyle.C")
 # ROOT.gROOT.ForceStyle()
-
-# prefix = '/eos/user/b/bimitres/V0_crosssections/SciFi_alignment_run256166/'
-prefix = "roots/"
-no_tuning = '500k_i10_base_loose/GoodLongTracks_base_500k_i10.root' # base, probably 200k but not sure (also not sure if loose or strict)
+print('start reading data')
+prefix = 'root_500k/'
+no_tuning = 'GoodLongTracks_base_500k_i10.root' # base, probably 200k but not sure (also not sure if loose or strict)
 #no_tuning = 'GoodLongTracks_best_strict.root' # strict selection
 with_tuning = 'GoodLongTracks_histo_i8_500k_loose.root' # 500k best, converged
 
 # new files to compare for joint constraints
-small_Tx = "root_500k/GoodLongTracks_tuned_0_0001_Tx.root"
-oldTx_other_tuned = "root_500k/GoodLongTracks_oldTx_rest_tuned.root"
-Tx_0_8 = "root_500k/GoodLongTracks_0_8_onlyTx.root"
-Tx_0_6 = "root_500k/GoodLongTracks_0_6_onlyTx.root"
-
+# small_Tx = "GoodLongTracks_tuned_0_0001_Tx.root"
+# oldTx_other_tuned = "GoodLongTracks_oldTx_rest_tuned.root"
+# Tx_0_8 = "GoodLongTracks_0_8_onlyTx.root"
+# Tx_0_6 = "GoodLongTracks_0_6_onlyTx.root"
+Tx_2mm = 'GoodLongTracks_2mm_Tx.root'
+print('finished reading data')
 ## switch input order just to see if the plotscale changes
 #no_tuning = '500k_i10_base_loose/GoodLongTracks_base_500k_i10.root' # base, probably 2$
 #no_tuning = 'GoodLongTracks_best_strict.root' # strict selection
@@ -50,36 +54,38 @@ Tx_0_6 = "root_500k/GoodLongTracks_0_6_onlyTx.root"
 print('1')
 names = ["yT1", "yT2", "yT3", "xT1", "xT2", "xT3", "xT1","yT1","txT1", "txT2", "txT3", "tyT1", "tyT2", "tyT3", "unbiasedFTResidual", "RMSResidualModules", "RMSResidualQuarters"]
 
-axes_titles = ["y T1 Station [mm]", "y T2 Station [mm]", "y T3 Station [mm]", 
-               "x T1 Station [mm]", "x T2 Station [mm]", "x T3 Station [mm]", 
-               "x T1 Station [mm]", "y T1 Station [mm]", 
-               "tx T1 Station", "tx T2 Station", "tx T3 Station", 
-               "ty T1 Station", "ty T2 Station", "ty T3 Station", 
+axes_titles = ["y T1 Station [mm]", "y T2 Station [mm]", "y T3 Station [mm]",
+               "x T1 Station [mm]", "x T2 Station [mm]", "x T3 Station [mm]",
+               "x T1 Station [mm]", "y T1 Station [mm]",
+               "tx T1 Station", "tx T2 Station", "tx T3 Station",
+               "ty T1 Station", "ty T2 Station", "ty T3 Station",
                "FT X Resiudual [mm]" , "RMS ResidualModules [mm]", "RMSResidualQuarters [mm]"]
 print('2')
 histos1 = []
 histos2 = []
 histos3 = []
-histos4 = []
-histos5 = []
-histos6 = []
+# histos4 = []
+# histos5 = []
+# histos6 = []
 for i in range(0,len(names)):
     histos1.append(TH1D())
     histos2.append(TH1D())
     histos3.append(TH1D())
-    histos4.append(TH1D())
-    histos5.append(TH1D())
-    histos6.append(TH1D())
+    # histos4.append(TH1D())
+    # histos5.append(TH1D())
+    # histos6.append(TH1D())
 
+print('prefix:', prefix)
+print('no_tuning:', no_tuning)
 file1 = TFile.Open(prefix + no_tuning)
 file2 = TFile.Open(prefix + with_tuning)
-file3 = TFile.Open(prefix + small_Tx)
-file4 = TFile.Open(prefix + oldTx_other_tuned)
-file5 = TFile.Open(prefix + Tx_0_8)
-file6 = TFile.Open(prefix + Tx_0_6)
-
+# file3 = TFile.Open(prefix + small_Tx)
+# file4 = TFile.Open(prefix + oldTx_other_tuned)
+# file5 = TFile.Open(prefix + Tx_0_8)
+# file6 = TFile.Open(prefix + Tx_0_6)
+file3 = TFile.Open(prefix + Tx_2mm)
 # order changed
-files =[file2, file1, file3, file4, file5, file6]
+files =[file2, file1, file3]
 print('3')
 
 for f in range(0,len(files)):
@@ -115,23 +121,24 @@ for f in range(0,len(files)):
             histos2 = gethistos
         if f == 2:
             histos3 = gethistos
-        if f == 3:
-            histos4 = gethistos
-        if f == 4:
-            histos5 = gethistos
-        if f == 5:
-            histos6 = gethistos
+        # if f == 3:
+        #     histos4 = gethistos
+        # if f == 4:
+        #     histos5 = gethistos
+        # if f == 5:
+        #     histos6 = gethistos
 print('4')
 
 c = ROOT.TCanvas()
 ROOT.gStyle.SetOptStat(0)
 
+line = TLine()
 for i in range(0,len(histos1)):
     histos1[i].SetMarkerStyle(20);
     histos1[i].SetMarkerSize(0.8);
     histos1[i].SetMarkerColor(2);
-    histos1[i].GetXaxis().SetTitle(axes_titles[i])
-    histos1[i].GetYaxis().SetTitle("Events")
+    histos1[i].GetYaxis().SetTitle(axes_titles[i])
+    histos1[i].GetXaxis().SetTitle("Events")
     #histos1[i].GetXaxis().SetRangeUser(1850.0, 1900.0)
 #    histos1[i].Scale(1/(histos1[i].Integral())) # also comment that out when binning is wrong
     histos1[i].Draw("EP")
@@ -145,21 +152,27 @@ for i in range(0,len(histos1)):
     histos3[i].SetMarkerSize(0.8)
 #    histos3[i].Scale(1/(histos3[i].Integral())) # comment that out if binning is wrong
     histos3[i].Draw("same")
-    histos4[i].SetMarkerColor(8)
-    histos4[i].SetMarkerStyle(22)
-    histos4[i].SetMarkerSize(0.8)
-#    histos4[i].Scale(1/(histos4[i].Integral())) # comment that out if binning is wrong
-    histos4[i].Draw("same")
-    histos5[i].SetMarkerColor(5)
-    histos5[i].SetMarkerStyle(22)
-    histos5[i].SetMarkerSize(0.8)
-#    histos5[i].Scale(1/(histos5[i].Integral())) # comment that out if binning is wrong
-    histos5[i].Draw("same")
-    histos6[i].SetMarkerColor(12)
-    histos6[i].SetMarkerStyle(22)
-    histos6[i].SetMarkerSize(0.8)
-#    histos6[i].Scale(1/(histos6[i].Integral())) # comment that out if binning is wrong
-    histos6[i].Draw("same")
+    # histos4[i].SetMarkerColor(8)
+    # histos4[i].SetMarkerStyle(22)
+    # histos4[i].SetMarkerSize(0.8)
+    # histos4[i].Scale(1/(histos4[i].Integral())) # comment that out if binning is wrong
+    # histos4[i].Draw("same")
+    # histos5[i].SetMarkerColor(5)
+    # histos5[i].SetMarkerStyle(22)
+    # histos5[i].SetMarkerSize(0.8)
+    # histos5[i].Scale(1/(histos5[i].Integral())) # comment that out if binning is wrong
+    # histos5[i].Draw("same")
+    # histos6[i].SetMarkerColor(12)
+    # histos6[i].SetMarkerStyle(22)
+    # histos6[i].SetMarkerSize(0.8)
+    # histos6[i].Scale(1/(histos6[i].Integral())) # comment that out if binning is wrong
+    # histos6[i].Draw("same")
+    if names[i] == 'RMSResidualQuarters':
+        for j in range(48):
+            if j % 4 == 0 and j != 0:
+                print('j:', j)
+                histos3[i].Draw('same')
+                line.DrawLine(j-0.5,-0.03, j-0.5, 0.04)
     leg = ROOT.TLegend(0.7,0.7,0.8,0.85)
     leg.SetFillStyle(0)
     leg.SetFillColor(0)
@@ -168,10 +181,11 @@ for i in range(0,len(histos1)):
     leg.SetTextSize(0.055)
     leg.AddEntry(histos1[i], "with tuning", "P")
     leg.AddEntry(histos2[i], "no tuning", "P")
-    leg.AddEntry(histos3[i], "very small Tx, tuned", "P")
-    leg.AddEntry(histos4[i], "old Tx, rest tuned", "P")
-    leg.AddEntry(histos5[i], "0.8 Tx, rest tuned", "P")
-    leg.AddEntry(histos6[i], "0.6 Tx, rest tuned", "P")
+    # leg.AddEntry(histos3[i], "very small Tx, tuned", "P")
+    # leg.AddEntry(histos4[i], "old Tx, rest tuned", "P")
+    # leg.AddEntry(histos5[i], "0.8 Tx, rest tuned", "P")
+    # leg.AddEntry(histos6[i], "0.6 Tx, rest tuned", "P")
+    leg.AddEntry(histos3[i], "2mm Tx", "P")
     leg.Draw()
     #c1.SetLogx()
     #c.BuildLegend(0.5,0.3,0.8,0.5,"","P") #0.5,0.3,0.8,0.5
@@ -180,4 +194,4 @@ for i in range(0,len(histos1)):
     T1.DrawLatexNDC(.25,.80, "LHCb Internal")
     T1.DrawLatexNDC(.25,.75, "Run 269045")
 
-    c.SaveAs("home/nbreer/fast_plotting_root/outfiles/comp_Tx/" + names[i] + "comp_vars.pdf")
+    c.SaveAs("outfiles/compi/" + names[i] + "comp_vars.pdf")
