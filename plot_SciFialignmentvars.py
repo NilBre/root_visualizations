@@ -41,6 +41,7 @@ oldTx_other_tuned = "GoodLongTracks_oldTx_rest_tuned.root"
 Tx_0_8 = "GoodLongTracks_0_8_onlyTx.root"
 Tx_0_6 = "GoodLongTracks_0_6_onlyTx.root"
 Tx_2mm = 'GoodLongTracks_2mm_Tx.root'
+Tx_micron_10 = 'GoodLongTracks_Tx_10micron_Rz_better.root'
 
 print('finished reading data')
 ## switch input order just to see if the plotscale changes
@@ -65,29 +66,33 @@ histos1 = []
 histos2 = []
 histos3 = []
 histos4 = []
-histos5 = []
-histos6 = []
-histos7 = []
+# histos5 = []
+# histos6 = []
+# histos7 = []
+# histos8 = []
 for i in range(0,len(names)):
     histos1.append(TH1D())
     histos2.append(TH1D())
     histos3.append(TH1D())
     histos4.append(TH1D())
-    histos5.append(TH1D())
-    histos6.append(TH1D())
-    histos7.append(TH1D())
+    # histos5.append(TH1D())
+    # histos6.append(TH1D())
+    # histos7.append(TH1D())
+    # histos8.append(TH1D())
 
 print('prefix:', prefix)
 print('no_tuning:', no_tuning)
 file1 = TFile.Open(prefix + no_tuning)
 file2 = TFile.Open(prefix + with_tuning)
 file3 = TFile.Open(prefix + Tx_2mm)
-file4 = TFile.Open(prefix + oldTx_other_tuned)
-file5 = TFile.Open(prefix + Tx_0_8)
-file6 = TFile.Open(prefix + Tx_0_6)
-file7 = TFile.Open(prefix + small_Tx)
+file4 = TFile.Open(prefix + Tx_micron_10)
+# file5 = TFile.Open(prefix + oldTx_other_tuned)
+# file6 = TFile.Open(prefix + Tx_0_8)
+# file7 = TFile.Open(prefix + Tx_0_6)
+# file8 = TFile.Open(prefix + small_Tx)
 # order changed
-files =[file2, file1, file3, file4, file5, file6, file7]
+# files =[file2, file1, file3, file4, file5, file6, file7, file8]
+files =[file2, file1, file3, file4]
 print('3')
 
 for f in range(0,len(files)):
@@ -125,12 +130,14 @@ for f in range(0,len(files)):
             histos3 = gethistos
         if f == 3:
             histos4 = gethistos
-        if f == 4:
-            histos5 = gethistos
-        if f == 5:
-            histos6 = gethistos
-        if f == 6:
-            histos7 = gethistos
+        # if f == 4:
+        #     histos5 = gethistos
+        # if f == 5:
+        #     histos6 = gethistos
+        # if f == 6:
+        #     histos7 = gethistos
+        if f == 7:
+            histos8 = gethistos
 print('4')
 
 c = ROOT.TCanvas()
@@ -161,21 +168,26 @@ for i in range(0,len(histos1)):
     histos4[i].SetMarkerSize(0.8)
     # histos4[i].Scale(1/(histos4[i].Integral())) # comment that out if binning is wrong
     histos4[i].Draw("same")
-    histos5[i].SetMarkerColor(5)
-    histos5[i].SetMarkerStyle(22)
-    histos5[i].SetMarkerSize(0.8)
-    # histos5[i].Scale(1/(histos5[i].Integral())) # comment that out if binning is wrong
-    histos5[i].Draw("same")
-    histos6[i].SetMarkerColor(12)
-    histos6[i].SetMarkerStyle(22)
-    histos6[i].SetMarkerSize(0.8)
-    # histos6[i].Scale(1/(histos6[i].Integral())) # comment that out if binning is wrong
-    histos6[i].Draw("same")
-    histos7[i].SetMarkerColor(13)
-    histos7[i].SetMarkerStyle(22)
-    histos7[i].SetMarkerSize(0.8)
-    # histos7[i].Scale(1/(histos7[i].Integral())) # comment that out if binning is wrong
-    histos7[i].Draw("same")
+    # histos5[i].SetMarkerColor(5)
+    # histos5[i].SetMarkerStyle(22)
+    # histos5[i].SetMarkerSize(0.8)
+    # # histos5[i].Scale(1/(histos5[i].Integral())) # comment that out if binning is wrong
+    # histos5[i].Draw("same")
+    # histos6[i].SetMarkerColor(12)
+    # histos6[i].SetMarkerStyle(22)
+    # histos6[i].SetMarkerSize(0.8)
+    # # histos6[i].Scale(1/(histos6[i].Integral())) # comment that out if binning is wrong
+    # histos6[i].Draw("same")
+    # histos7[i].SetMarkerColor(13)
+    # histos7[i].SetMarkerStyle(22)
+    # histos7[i].SetMarkerSize(0.8)
+    # # histos7[i].Scale(1/(histos7[i].Integral())) # comment that out if binning is wrong
+    # histos7[i].Draw("same")
+    # histos8[i].SetMarkerColor(8)
+    # histos8[i].SetMarkerStyle(22)
+    # histos8[i].SetMarkerSize(0.8)
+    # # histos8[i].Scale(1/(histos8[i].Integral())) # comment that out if binning is wrong
+    # histos8[i].Draw("same")
     if names[i] == 'RMSResidualQuarters':
         for j in range(48):
             if j % 4 == 0 and j != 0:
@@ -190,11 +202,12 @@ for i in range(0,len(histos1)):
     leg.SetTextSize(0.055)
     leg.AddEntry(histos1[i], "with tuning", "P")
     leg.AddEntry(histos2[i], "no tuning", "P")
-    leg.AddEntry(histos3[i], "2micron Tx", "P")
-    leg.AddEntry(histos4[i], "old Tx, rest tuned", "P")
-    leg.AddEntry(histos5[i], "0.8micron Tx, rest tuned", "P")
-    leg.AddEntry(histos6[i], "0.6micron Tx, rest tuned", "P")
-    leg.AddEntry(histos7[i], "0.1micron, tuned", "P")
+    leg.AddEntry(histos3[i], "2 micron", "P")
+    leg.AddEntry(histos4[i], "10 micron", "P")
+    # leg.AddEntry(histos5[i], "1 micron", "P")
+    # leg.AddEntry(histos6[i], "0.8 micron", "P")
+    # leg.AddEntry(histos7[i], "0.6 micron", "P")
+    # leg.AddEntry(histos8[i], "0.1 micron", "P")
     leg.Draw()
     #c1.SetLogx()
     #c.BuildLegend(0.5,0.3,0.8,0.5,"","P") #0.5,0.3,0.8,0.5
@@ -203,4 +216,4 @@ for i in range(0,len(histos1)):
     T1.DrawLatexNDC(.25,.80, "LHCb Internal")
     T1.DrawLatexNDC(.25,.75, "Run 269045")
 
-    c.SaveAs("outfiles/compi/" + names[i] + "comp_all_files.pdf")
+    c.SaveAs("outfiles/compi/" + names[i] + "comp_choice.pdf")
