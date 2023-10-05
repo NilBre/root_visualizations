@@ -1,0 +1,117 @@
+********************* ALIGNMENT LOG ************************
+Iteration: 0
+Total number of events: 6
+Time of first event [ns]: 1695967864334827000 --> 2023-09-29 08:11:04 AM
+Time of last event [ns] : 1696158012228134000 --> 2023-10-01 01:00:12 PM
+Time at initialize [ns] : 0 --> 1970-01-01 01:00:00 AM
+First/last run number: 277675/277881
+Min/max IOV: 18446744073709551615/0
+Used 43 vertices for alignment
+Used 0 particles for alignment
+Used 324 tracks for alignment
+Total chisquare/dofs:    3097.39 / 2349
+Average track chisquare: 7.0018
+Track chisquare/dof:     1.23966
+Vertex chisquare/dof:    1.59694
+Used 3450 hits for alignment
+Total number of hits in external detectors: 0
+Average number of tracks per vertex: 7.53488
+Total chisquare of survey constraints: 10.7658 / 12
+Number of alignables with insufficient statistics: 0
+Number of lagrange constraints: 3
+Number of chisq constraints:    12
+Number of active parameters:    6
+Time to compute solution [ms]: 1.17793
+Error2: 2.3912e-26
+Alignment delta chisquare/dof: 6.56523 / 3
+Normalised alignment change chisquare: 2.18841
+Alignment delta chisquare/track dof: 0.00358756
+Alternative total chisq: 6.56523
+Maximum chisq contribution of eigenmode: 6.25446
+Number of negative eigenvalues: 3
+Number of eigenvalues < 1: 0
+Smallest eigenvalues: 2775.11 3274.81 3838.29 -9991.8 10008.8 -19994.2 20006.1 -29784.4 30217.3 0 
+Parameter contributing most to weakest mode: VP/MotionVPLeft/VPLeft 1 -0.709651
+Alignment parameter with largest contribution to chi2: VP/MotionVPRight/VPRight 0 2.35127
+Convergence status: Converged
+Most important dofs, including survey: 
+  0 VP/MotionVPRight/VPRight dof=0 active=1  chi2= 5.01177 delta= -0.039661 +/- 0.0177161
+  1 VP/MotionVPLeft/VPLeft dof=0 active=1  chi2= 4.97582 delta= 0.0394127 +/- 0.0176686
+  2 VP/MotionVPRight/VPRight dof=3 active=0  chi2= 3.66273 delta= 0.00025183 +/- 0.000131585
+  3 VP/MotionVPLeft/VPLeft dof=3 active=0  chi2= 3.65456 delta= -0.000251466 +/- 0.000131541
+  4 VP/MotionVPLeft/VPLeft dof=5 active=0  chi2= 2.76668 delta= 0.00104648 +/- 0.000629144
+  5 VP/MotionVPLeft/VPLeft dof=1 active=1  chi2= 2.14328 delta= -0.0229654 +/- 0.0156868
+  6 VP/MotionVPRight/VPRight dof=1 active=1  chi2= 2.13728 delta= 0.0229204 +/- 0.015678
+  7 VP/MotionVPRight/VPRight dof=5 active=0  chi2= 1.62008 delta= 0.000798292 +/- 0.000627181
+  8 VP/MotionVPRight/VPRight dof=4 active=0  chi2= 0.208179 delta= 7.8773e-05 +/- 0.000172647
+  9 VP/MotionVPLeft/VPLeft dof=2 active=1  chi2= 0.183821 delta= 0.0424915 +/- 0.0991069
+  10 VP/MotionVPLeft/VPLeft dof=4 active=0  chi2= 0.125873 delta= -6.06747e-05 +/- 0.000171018
+  11 VP/MotionVPRight/VPRight dof=2 active=1  chi2= 0.0170944 delta= -0.0130295 +/- 0.0996557
+Canonical constraint values: 
+VPHalfAverage Tx chi2: 0.000851027  residual: 0.00775581   +/- 0.265861     gcc^2: 0.00426453  
+VPHalfAverage Ty chi2: 0.000379922  residual: 0.00549999   +/- 0.282172     gcc^2: 2.11963e-05 
+VPHalfAverage Tz chi2: 0.177161     residual: -0.118545    +/- 0.281643     gcc^2: 0.00428553  
+Canonical constraint chisquare: 0.180693
+Values of constraint equations after solution (X=active,O=inactive): 
+Tx   O  6.93608e-18  +/- 2.60313e-10
+Ty   O  0            +/- -1.64636e-10
+Tz   O  -3.46945e-18 +/- -1.74234e-09
+Rx   O  0            +/- 0
+Ry   O  0            +/- 0
+Rz   O  0            +/- 0
+Szx  O  0.0186069    +/- 0.0089571
+Szy  O  -0.00980771  +/- 0.00789853
+Szz  O  0.00620451   +/- 0.0533842
+Sxx  O  -0.0186069   +/- 0.0089571
+SzRz O  0            +/- 0
+Trx  O  -0.000276897 +/- 0.00126948
+Try  O  -4.23664e-05 +/- 0.000391894
+Trtx O  -1.30987e-05 +/- 2.96072e-05
+Trty O  4.80012e-06  +/- 9.37043e-06
+Trcur O  0            +/- 0
+PVx  O  7.77474e-05  +/- 0.00357306
+PVy  O  0.000156236  +/- 0.00134267
+PVz  O  -0.0530329   +/- 0.0326336
+Sz2x O  0.0186069    +/- 0.0089571
+Sz2y O  -0.00980771  +/- 0.00789853
+Sz2z O  0.00620451   +/- 0.0533842
+Sz2Rz O  0            +/- 0
+total local delta chi2 / dof: 3.29543 / 6
+Survey constraints with largest chisquare contribution: 
+  0 VP/MotionVPRight/VPRight       dof=2 active=1  chi2=4.04  survey=0 delta=0.388  surveyerr=0.2 deltaerr=0.0534
+  1 VP/MotionVPLeft/VPLeft         dof=2 active=1  chi2=4.04  survey=0 delta=-0.387  surveyerr=0.2 deltaerr=0.0534
+  2 VP/MotionVPRight/VPRight       dof=5 active=0  chi2=0.859  survey=0 delta=-0.00278  surveyerr=0.003 deltaerr=0
+  3 VP/MotionVPLeft/VPLeft         dof=5 active=0  chi2=0.859  survey=0 delta=0.00278  surveyerr=0.003 deltaerr=0
+  4 VP/MotionVPLeft/VPLeft         dof=0 active=1  chi2=0.58  survey=0 delta=-0.152  surveyerr=0.2 deltaerr=0.00896
+  5 VP/MotionVPRight/VPRight       dof=0 active=1  chi2=0.576  survey=0 delta=0.152  surveyerr=0.2 deltaerr=0.00896
+  6 VP/MotionVPRight/VPRight       dof=1 active=1  chi2=0.179  survey=0 delta=-0.0846  surveyerr=0.2 deltaerr=0.0079
+  7 VP/MotionVPLeft/VPLeft         dof=1 active=1  chi2=0.173  survey=0 delta=0.0831  surveyerr=0.2 deltaerr=0.0079
+  8 VP/MotionVPLeft/VPLeft         dof=3 active=0  chi2=0.017  survey=0 delta=0.000131  surveyerr=0.001 deltaerr=0
+  9 VP/MotionVPRight/VPRight       dof=3 active=0  chi2=0.0167  survey=0 delta=-0.000129  surveyerr=0.001 deltaerr=0
+Alignable: VP/MotionVPLeft/VPLeft
+Global position: (25.6002,0.659625,-1.3) Average position of hits: (33.9801,10.5162,242.684)
+Number of tracks/hits/outliers seen: 63 1692 0
+Local-to-global diagonal: 1 1 1 1 1 1 
+Tx  : curtot= 25.45        cur= -0.1521      delta= -0.01861     +/- 0.008957     [ 0.01767      ]  gcc= 0
+Ty  : curtot= 0.8141       cur= 0.0831       delta= 0.009808     +/- 0.007899     [ 0.01569      ]  gcc= 0
+Tz  : curtot= -1.687       cur= -0.3875      delta= -0.006205    +/- 0.05338      [ 0.09911      ]  gcc= 0
+contribution to hit uncertainty (absolute/relative): 0.0003906 0.03125
+local delta chi2 / dof: 1.65 / 3
+survey chi2 / dof (before/after): 4.504 4.504 / 3
+align pars: -0.1521, 0.0831, -0.3875, 0.0001305, -3.334e-05, 0.00278
+survey pars:   0, 0, 0, 0, 0, 0
+survey uncertainties: 0.2, 0.2, 0.2, 0.001, 0.001, 0.003
+Alignable: VP/MotionVPRight/VPRight
+Global position: (-23.4,0.6596,-1.3) Average position of hits: (-32.2,-11.23,232)
+Number of tracks/hits/outliers seen: 68 1758 0
+Local-to-global diagonal: 1 1 1 1 1 1 
+Tx  : curtot= -23.25       cur= 0.1516       delta= 0.01861      +/- 0.008957     [ 0.01772      ]  gcc= 0
+Ty  : curtot= 0.6399       cur= -0.08464     delta= -0.009808    +/- 0.007899     [ 0.01568      ]  gcc= 0
+Tz  : curtot= -0.9118      cur= 0.3875       delta= 0.006205     +/- 0.05338      [ 0.09966      ]  gcc= 0
+contribution to hit uncertainty (absolute/relative): 0.0003836 0.03069
+local delta chi2 / dof: 1.645 / 3
+survey chi2 / dof (before/after): 4.508 4.508 / 3
+align pars: 0.1516, -0.08464, 0.3875, -0.0001292, 3.433e-05, -0.002781
+survey pars:   0, 0, 0, 0, 0, 0
+survey uncertainties: 0.2, 0.2, 0.2, 0.001, 0.001, 0.003
+********************* END OF ALIGNMENT LOG ************************

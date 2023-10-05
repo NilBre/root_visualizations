@@ -34,14 +34,16 @@ print('start reading data')
 
 prefix = 'root_500k/'
 
-no_tuning = 'GoodLongTracks_base_500k_i10.root' # base, probably 200k but not sure (also not sure if loose or strict)
-with_tuning = 'GoodLongTracks_histo_i8_500k_loose.root' # 500k best, converged
-small_Tx = "GoodLongTracks_tuned_0_0001_Tx.root"
-oldTx_other_tuned = "GoodLongTracks_oldTx_rest_tuned.root"
-Tx_0_8 = "GoodLongTracks_0_8_onlyTx.root"
-Tx_0_6 = "GoodLongTracks_0_6_onlyTx.root"
+# no_tuning = 'GoodLongTracks_base_500k_i10.root' # base, probably 200k but not sure (also not sure if loose or strict)
+# with_tuning = 'GoodLongTracks_histo_i8_500k_loose.root' # 500k best, converged
+# small_Tx = "GoodLongTracks_tuned_0_0001_Tx.root"
+# oldTx_other_tuned = "GoodLongTracks_oldTx_rest_tuned.root"
+# Tx_0_8 = "GoodLongTracks_0_8_onlyTx.root"
+# Tx_0_6 = "GoodLongTracks_0_6_onlyTx.root"
 Tx_2mm = 'GoodLongTracks_2mm_Tx.root'
-Tx_micron_10 = 'GoodLongTracks_Tx_10micron_Rz_better.root'
+Tx_micron_10 = 'GoodLongTracks_Tx_10micron_Rz_better.root' # this uses TxRz
+Tx_10mu_TxTzRxRz = 'GoodLongtracks_TxTzRxRz_iter4_10micron_tuned.root'
+Tx_100mu_TxRz = 'GoodLongTracks_100mu_TxRz_iter15.root'
 
 print('finished reading data')
 ## switch input order just to see if the plotscale changes
@@ -80,12 +82,12 @@ for i in range(0,len(names)):
     # histos7.append(TH1D())
     # histos8.append(TH1D())
 
-print('prefix:', prefix)
-print('no_tuning:', no_tuning)
-file1 = TFile.Open(prefix + no_tuning)
-file2 = TFile.Open(prefix + with_tuning)
-file3 = TFile.Open(prefix + Tx_2mm)
-file4 = TFile.Open(prefix + Tx_micron_10)
+# file1 = TFile.Open(prefix + no_tuning)
+# file2 = TFile.Open(prefix + with_tuning)
+file1 = TFile.Open(prefix + Tx_2mm)
+file2 = TFile.Open(prefix + Tx_micron_10)
+file3 = TFile.Open(prefix + Tx_10mu_TxTzRxRz)
+file4 = TFile.Open(prefix + Tx_100mu_TxRz)
 # file5 = TFile.Open(prefix + oldTx_other_tuned)
 # file6 = TFile.Open(prefix + Tx_0_8)
 # file7 = TFile.Open(prefix + Tx_0_6)
@@ -136,8 +138,8 @@ for f in range(0,len(files)):
         #     histos6 = gethistos
         # if f == 6:
         #     histos7 = gethistos
-        if f == 7:
-            histos8 = gethistos
+        # if f == 7:
+        #     histos8 = gethistos
 print('4')
 
 c = ROOT.TCanvas()
@@ -193,17 +195,19 @@ for i in range(0,len(histos1)):
             if j % 4 == 0 and j != 0:
                 print('j:', j)
                 histos3[i].Draw('same')
-                line.DrawLine(j-0.5,-0.03, j-0.5, 0.04)
+                line.DrawLine(j-0.5,-0.00125, j-0.5, 0.00125)
     leg = ROOT.TLegend(0.7,0.7,0.8,0.85)
     leg.SetFillStyle(0)
     leg.SetFillColor(0)
     leg.SetBorderSize(0)
     leg.SetTextFont(132)
     leg.SetTextSize(0.055)
-    leg.AddEntry(histos1[i], "with tuning", "P")
-    leg.AddEntry(histos2[i], "no tuning", "P")
-    leg.AddEntry(histos3[i], "2 micron", "P")
-    leg.AddEntry(histos4[i], "10 micron", "P")
+    # leg.AddEntry(histos1[i], "with tuning", "P")
+    # leg.AddEntry(histos2[i], "no tuning", "P")
+    leg.AddEntry(histos1[i], "2 micron", "P")
+    leg.AddEntry(histos2[i], "10 micron TxRz", "P")
+    leg.AddEntry(histos3[i], "10 micron TxTzRxRz", "P")
+    leg.AddEntry(histos4[i], "100 micron TxRz", "P")
     # leg.AddEntry(histos5[i], "1 micron", "P")
     # leg.AddEntry(histos6[i], "0.8 micron", "P")
     # leg.AddEntry(histos7[i], "0.6 micron", "P")

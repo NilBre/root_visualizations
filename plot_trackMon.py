@@ -22,19 +22,27 @@ import json
 
 #no_tuning = 'GoodLongTracks_best_strict.root' # strict selection
 prefix = 'root_500k/'
-no_tuning = 'GoodLongTracks_base_500k_i10.root' # base, probably 200k but not sure (also not sure if loose or strict)
-with_tuning = 'GoodLongTracks_histo_i8_500k_loose.root' # 500k best, converged
-Tx_micron_10 = 'GoodLongTracks_Tx_10micron_Rz_better.root'
-Tx_2mm = 'GoodLongTracks_2mm_Tx.root'
-oldTx_other_tuned = "GoodLongTracks_oldTx_rest_tuned.root"
-Tx_0_8 = "GoodLongTracks_0_8_onlyTx.root"
-Tx_0_6 = "GoodLongTracks_0_6_onlyTx.root"
-small_Tx = "GoodLongTracks_tuned_0_0001_Tx.root"
+# no_tuning = 'GoodLongTracks_base_500k_i10.root' # base, probably 200k but not sure (also not sure if loose or strict)
+# with_tuning = 'GoodLongTracks_histo_i8_500k_loose.root' # 500k best, converged
+# Tx_micron_10 = 'GoodLongTracks_Tx_10micron_Rz_better.root'
+# Tx_2mm = 'GoodLongTracks_2mm_Tx.root'
+# oldTx_other_tuned = "GoodLongTracks_oldTx_rest_tuned.root"
+# Tx_0_8 = "GoodLongTracks_0_8_onlyTx.root"
+# Tx_0_6 = "GoodLongTracks_0_6_onlyTx.root"
+# small_Tx = "GoodLongTracks_tuned_0_0001_Tx.root"
 
-filenames = ['no_tuning',
-            'with_tuning',
-            '10_micron',
+Tx_2mm = 'GoodLongTracks_2mm_Tx.root'
+Tx_micron_10 = 'GoodLongTracks_Tx_10micron_Rz_better.root' # this uses TxRz
+Tx_10mu_TxTzRxRz = 'GoodLongtracks_TxTzRxRz_iter4_10micron_tuned.root'
+Tx_100mu_TxRz = 'GoodLongTracks_100mu_TxRz_iter15.root'
+
+filenames = [
+            # 'no_tuning',
+            # 'with_tuning',
             '2_micron',
+            '10_micron',
+            '10_TxTzRxRz',
+            '100_TxRz',
             # '1_micron',
             # '0_8_micron',
             # '0_6_micron',
@@ -63,24 +71,14 @@ for i in range(0,len(names)):
     # histos8.append(TH1D())
 print('1')
 
-# file1 = TFile.Open(prefix + no_tuning)
-# file2 = TFile.Open(prefix + with_tuning)
-# file3 = TFile.Open(prefix + Tx_2mm)
-# file4 = TFile.Open(prefix + small_Tx)
-# file5 = TFile.Open(prefix + oldTx_other_tuned)
-# file6 = TFile.Open(prefix + Tx_0_8)
-# file7 = TFile.Open(prefix + Tx_0_6)
-
-# files =[file2, file1, file3, file4, file5, file6, file7]
-
-print('2')
-
 filein = []
 for fileintag in [
-                  prefix + no_tuning,
-                  prefix + with_tuning,
-                  prefix + Tx_micron_10,
+                #   prefix + no_tuning,
+                #   prefix + with_tuning,
                   prefix + Tx_2mm,
+                  prefix + Tx_micron_10,
+                  prefix + Tx_10mu_TxTzRxRz,
+                  prefix + Tx_100mu_TxRz,
                   # prefix + oldTx_other_tuned,
                   # prefix + Tx_0_8,
                   # prefix + Tx_0_6,
@@ -92,12 +90,6 @@ for fileintag in [
 monitorname = "TrackMonitor_GoodLongTracks"
 
 ROOT.gStyle.SetOptStat(1)
-
-#source1 = getattr(filein[0], monitorname)
-#source2 = getattr(filein[1], monitorname)
-
-#source1 = getattr(source1, "Long")
-#source2 = getattr(source2, "Long")
 
 source = [getattr(file, monitorname) for file in filein]
 source = [getattr(label, "Long") for label in source]
@@ -215,10 +207,12 @@ for var in names:
     leg.SetBorderSize(0)
     leg.SetTextFont(132)
     leg.SetTextSize(0.055)
-    leg.AddEntry(hist, "no tuning", "P")
-    leg.AddEntry(hist1, "with tuning", "P")
-    leg.AddEntry(hist2, "10 micron", "P")
-    leg.AddEntry(hist3, "2 micron", "P")
+    # leg.AddEntry(hist, "no tuning", "P")
+    # leg.AddEntry(hist1, "with tuning", "P")
+    leg.AddEntry(hist, "2 micron", "P")
+    leg.AddEntry(hist1, "10 micron TxRz", "P")
+    leg.AddEntry(hist2, "10 micron TxTzRxRz", "P")
+    leg.AddEntry(hist3, "100 micron TxRz", "P")
     # leg.AddEntry(hist4, "1 micron", "P")
     # leg.AddEntry(hist5, "0.8 micron", "P")
     # leg.AddEntry(hist6, "0.8 micron", "P")
