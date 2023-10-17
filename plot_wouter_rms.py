@@ -26,7 +26,7 @@ prefix = 'root_500k/'
 
 no_tuning = 'GoodLongTracks_base_500k_i10.root' # base, probably 200k but not sure (also not sure if loose or strict)
 with_tuning = 'GoodLongTracks_histo_i8_500k_loose.root' # 500k best, converged
-
+Tx_micron_10 = 'GoodLongTracks_Tx_10micron_Rz_better.root'
 print('finished reading data')
 
 print('1')
@@ -41,14 +41,17 @@ axes_titles = ["y T1 Station [mm]", "y T2 Station [mm]", "y T3 Station [mm]",
 print('2')
 histos1 = []
 histos2 = []
+histos3 = []
 for i in range(0,len(names)):
     histos1.append(TH1D())
     histos2.append(TH1D())
+    histos3.append(TH1D())
 
 file1 = TFile.Open(prefix + no_tuning)
 file2 = TFile.Open(prefix + with_tuning)
+file3 = TFile.Open(prefix + Tx_micron_10)
 
-files =[file2, file1]
+files =[file2, file3, file1]
 
 for f in range(0,len(files)):
     for n in range(0,len(names)):
@@ -76,6 +79,8 @@ for f in range(0,len(files)):
             histos1 = gethistos
         if f == 1:
             histos2 = gethistos
+        if f == 2:
+            histos3 = gethistos
 print('4')
 
 c = ROOT.TCanvas()
@@ -100,14 +105,22 @@ for i in range(0,len(histos1)):
 #    histos2[i].Scale(1/(histos2[i].Integral())) # comment that out if binning is wrong
     histos2[i].Draw("EP same")
 
+    histos3[i].SetMarkerColor(5)
+    histos3[i].SetLineColor(5)
+    histos3[i].SetMarkerStyle(22)
+    histos3[i].SetMarkerSize(0.8)
+#    histos2[i].Scale(1/(histos2[i].Integral())) # comment that out if binning is wrong
+    histos3[i].Draw("EP same")
+
     leg = ROOT.TLegend(0.6,0.7,0.8,0.9)
     leg.SetFillStyle(0)
     leg.SetFillColor(11)
     leg.SetBorderSize(0)
     leg.SetTextFont(132)
     leg.SetTextSize(0.053)
-    leg.AddEntry(histos1[i], "no tuning", "P")
-    leg.AddEntry(histos2[i], "with tuning", "P")
+    leg.AddEntry(histos1[i], "with tuning", "P")
+    leg.AddEntry(histos2[i], "tuned, 10 micron in Tx", "P")
+    leg.AddEntry(histos3[i], "no tuning", "P")
     leg.Draw()
     #c1.SetLogx()
     #c.BuildLegend(0.5,0.3,0.8,0.5,"","P") #0.5,0.3,0.8,0.5
@@ -116,4 +129,4 @@ for i in range(0,len(histos1)):
     T1.DrawLatexNDC(.25,.80, "LHCb Internal")
     T1.DrawLatexNDC(.25,.75, "Run 269045")
 
-    c.SaveAs("outfiles/compi/wp2_comparison/" + names[i] + "controlplot.pdf")
+    c.SaveAs("outfiles/compi/wp2_comparison/" + names[i] + "_with_vs_without.pdf")
